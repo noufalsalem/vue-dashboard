@@ -21,7 +21,7 @@ const goToDesignatedRoute = (route) => {
 
 <template>
   <aside
-    class="bg-gray-50 dark:bg-gray-600 h-screen fixed top-0 pt-16 transition-width duration-300"
+    class="bg-gray-50 dark:bg-gray-700 h-screen fixed top-0 pt-16 transition-width duration-300"
     :class="isOpen ? 'w-64' : 'w-0'"
   >
     <nav v-if="isOpen" class="mt-4">

@@ -20,12 +20,10 @@ const toggleSidebar = () => {
   >
     <div class="flex justify-between items-center">
       <div class="flex gap-4 items-center">
-        <button @click="toggleSidebar" class="text-gray-700 dark:text-gray-300">
+        <button @click="toggleSidebar">
           <font-awesome-icon :icon="['fas', 'bars']" />
         </button>
-        <h1 class="text-lg font-bold text-gray-800 dark:text-white">
-          Dashboard
-        </h1>
+        <h1 class="text-lg font-bold">Dashboard</h1>
       </div>
 
       <DarkModeToggle />

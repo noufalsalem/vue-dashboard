@@ -6,8 +6,9 @@ export const useModal = () => {
   const currentPost = ref<Post | null>(null);
   const comments = ref<Comment[]>([]);
   const isCommentsLoading = ref(false);
+  const error = ref<string | null>(null);
 
-  const openModal = async (post: Post) => {
+  const openModal = (post: Post) => {
     currentPost.value = post;
     isModalOpen.value = true;
 
@@ -23,16 +24,28 @@ export const useModal = () => {
   const fetchComments = async () => {
     if (!currentPost.value) return;
     isCommentsLoading.value = true;
+    error.value = null;
 
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/comments?postId=${currentPost.value.id}`
-    );
+    try {
+      const response = await fetch(
+        `https://jsonplaceholder.typicode.com/comments?postId=${currentPost.value.id}`
+      );
 
-    const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`Failed fetch: ${response.statusText}`);
+      }
 
-    comments.value = data;
-
-    isCommentsLoading.value = false;
+      const data = await response.json();
+      comments.value = data;
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        error.value = `Error: ${err.message}`;
+      } else {
+        error.value = "Unknown error occurred";
+      }
+    } finally {
+      isCommentsLoading.value = false;
+    }
   };
 
   return {

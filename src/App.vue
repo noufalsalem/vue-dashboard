@@ -7,7 +7,9 @@ const { isSidebarOpen, toggleSidebar } = useSidebar();
 </script>
 
 <template>
-  <div class="bg-white dark:bg-gray-900 min-h-screen flex flex-col">
+  <div
+    class="bg-white dark:bg-gray-900 min-h-screen flex flex-col transition-all"
+  >
     <Header @toggleSidebar="toggleSidebar" :isSidebarOpen="isSidebarOpen" />
     <div class="flex flex-1">
       <Sidebar :isOpen="isSidebarOpen" />
